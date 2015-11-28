@@ -1,7 +1,7 @@
 <div class="mdl-grid">
 {{#mdl-card title='Macro\'s Caloric Content' class=" text-white"}}
   <div class="mdl-card__supporting-text">Each macronutrient has a ballpart calorie count.</div>
-  {{#mdl-table class='full-width' content=macros as |macro|}}
+  {{#mdl-table-object class='full-width' content=macros as |macro|}}
     {{#mdl-table-col label='Macro'}}
       {{macro.name}}
     {{/mdl-table-col}}
@@ -9,14 +9,14 @@
     {{#mdl-table-col label='calories'}}
       {{macro.calories}}
     {{/mdl-table-col}}
-  {{/mdl-table}}
+  {{/mdl-table-object}}
 {{/mdl-card}}
 
 {{#mdl-card title='Stats' class='repulator-card' }}
   <div class="mdl-card__supporting-text">
-    {{mdl-textfield label='Weight' value=weight}}
-    {{mdl-textfield label='Height' value=height}}
-    {{mdl-textfield label='Age' value=age}}
+    {{mdl-textfield label='Weight' value=human.weight}}
+    {{mdl-textfield label='Height' value=human.height}}
+    {{mdl-textfield label='Age' value=human.age}}
     <div>
       {{mdl-radio value='male' text='Male' name='sex'}}
       {{mdl-radio text='Female' name='sex' value='female'}}
@@ -26,20 +26,20 @@
 
 {{#mdl-card title='Daily Caloric Needs' class='repulator-card' }}
   <div class="mdl-card__supporting-text">
-    BMR: {{bmr}}<br>
+    BMR: {{human.bmr}}<br>
     http://www.bmi-calculator.net/bmr-calculator/bmr-formula.php
     <br>
     Daily Caloric Needs<br>
 
   </div>
 
-  {{#mdl-table-object class='full-width' content=hbeConditions as |condition label|}}
+  {{#mdl-table-object class='full-width' content=days as |condition label|}}
     {{#mdl-table-col label='Activity Level'}}
       {{condition.title}}
     {{/mdl-table-col}}
 
     {{#mdl-table-col label='Multiplier'}}
-      {{condition.multiplier}}
+      {{condition.hbeMultiplier}}
     {{/mdl-table-col}}
 
     {{#mdl-table-col label='total'}}
@@ -51,7 +51,7 @@
 
 
 {{#mdl-card title='Maintaincene' class='repulator-card' }}
-  {{#mdl-table-object class='full-width' content=daily as |day|}}
+  {{#mdl-table-object class='full-width' content=days as |day|}}
     {{#mdl-table-col label='Protein'}}
       {{day.protein}}
     {{/mdl-table-col}}
