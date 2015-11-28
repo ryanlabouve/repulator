@@ -52,15 +52,19 @@
 
 {{#mdl-card title='Maintaincene' class='repulator-card' }}
   {{#mdl-table-object class='full-width' content=days as |day|}}
+    {{#mdl-table-col label='Calories'}}
+      {{day.calories}}
+    {{/mdl-table-col}}
+
     {{#mdl-table-col label='Protein'}}
       {{day.protein}}
     {{/mdl-table-col}}
 
-    {{#mdl-table-col label='carb'}}
+    {{#mdl-table-col label='Carbs'}}
       {{day.carbs}}
     {{/mdl-table-col}}
 
-    {{#mdl-table-col label='fat'}}
+    {{#mdl-table-col label='Fats'}}
       {{day.fats}}
     {{/mdl-table-col}}
   {{/mdl-table-object}}
