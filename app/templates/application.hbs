@@ -1,3 +1,76 @@
-<h2 id="title">Welcome to Ember</h2>
+<div class="mdl-grid">
+{{#mdl-card title='Macro\'s Caloric Content' class=" text-white"}}
+  <div class="mdl-card__supporting-text">Each macronutrient has a ballpart calorie count.</div>
+  {{#mdl-table class='full-width' content=macros as |macro|}}
+    {{#mdl-table-col label='Macro'}}
+      {{macro.name}}
+    {{/mdl-table-col}}
 
+    {{#mdl-table-col label='calories'}}
+      {{macro.calories}}
+    {{/mdl-table-col}}
+  {{/mdl-table}}
+{{/mdl-card}}
+
+{{#mdl-card title='Stats' class='repulator-card' }}
+  <div class="mdl-card__supporting-text">
+    {{mdl-textfield label='Weight' value=weight}}
+    {{mdl-textfield label='Height' value=height}}
+    {{mdl-textfield label='Age' value=age}}
+    <div>
+      {{mdl-radio value='male' text='Male' name='sex'}}
+      {{mdl-radio text='Female' name='sex' value='female'}}
+    </div>
+  </div>
+{{/mdl-card}}
+
+{{#mdl-card title='Daily Caloric Needs' class='repulator-card' }}
+  <div class="mdl-card__supporting-text">
+    BMR: {{bmr}}<br>
+    http://www.bmi-calculator.net/bmr-calculator/bmr-formula.php
+    <br>
+    Daily Caloric Needs<br>
+
+  </div>
+
+  {{#mdl-table class='full-width' content=hbeConditions as |condition|}}
+    {{#mdl-table-col label='Activity Level'}}
+      {{condition.title}}
+    {{/mdl-table-col}}
+
+    {{#mdl-table-col label='Multiplier'}}
+      {{condition.multiplier}}
+    {{/mdl-table-col}}
+
+    {{#mdl-table-col label='total'}}
+      {{multiplier bmr condition.multiplier}}
+    {{/mdl-table-col}}
+  {{/mdl-table}}
+{{/mdl-card}}
+
+
+{{#mdl-card title='Maintaincent' class='repulator-card' }}
+  <div class="mdl-card__supporting-text">
+    BMR: {{bmr}}<br>
+    http://www.bmi-calculator.net/bmr-calculator/bmr-formula.php
+    <br>
+    Daily Caloric Needs<br>
+
+  </div>
+
+  {{#mdl-table class='full-width' content=hbeConditions as |condition|}}
+    {{#mdl-table-col label='Activity Level'}}
+      {{condition.title}}
+    {{/mdl-table-col}}
+
+    {{#mdl-table-col label='Multiplier'}}
+      {{condition.multiplier}}
+    {{/mdl-table-col}}
+
+    {{#mdl-table-col label='total'}}
+      {{multiplier bmr condition.multiplier}}
+    {{/mdl-table-col}}
+  {{/mdl-table}}
+{{/mdl-card}}
 {{outlet}}
+</div>

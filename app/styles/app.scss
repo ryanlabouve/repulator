@@ -1,0 +1,15 @@
+@import 'material-design-lite';
+
+.full-width {
+  width: 100%;
+}
+
+.mdl-card__title {
+  background: unquote("rgb(#{$color-primary})");
+}
+
+.mdl-card__title-text {
+  color: white !important;
+};
+
+
