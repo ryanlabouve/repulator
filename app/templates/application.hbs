@@ -33,7 +33,7 @@
 
   </div>
 
-  {{#mdl-table class='full-width' content=hbeConditions as |condition|}}
+  {{#mdl-table-object class='full-width' content=hbeConditions as |condition label|}}
     {{#mdl-table-col label='Activity Level'}}
       {{condition.title}}
     {{/mdl-table-col}}
@@ -43,34 +43,27 @@
     {{/mdl-table-col}}
 
     {{#mdl-table-col label='total'}}
-      {{multiplier bmr condition.multiplier}}
+      {{!multiplier bmr condition.multiplier}}
+      {{condition.calories}}
     {{/mdl-table-col}}
-  {{/mdl-table}}
+  {{/mdl-table-object}}
 {{/mdl-card}}
 
 
-{{#mdl-card title='Maintaincent' class='repulator-card' }}
-  <div class="mdl-card__supporting-text">
-    BMR: {{bmr}}<br>
-    http://www.bmi-calculator.net/bmr-calculator/bmr-formula.php
-    <br>
-    Daily Caloric Needs<br>
-
-  </div>
-
-  {{#mdl-table class='full-width' content=hbeConditions as |condition|}}
-    {{#mdl-table-col label='Activity Level'}}
-      {{condition.title}}
+{{#mdl-card title='Maintaincene' class='repulator-card' }}
+  {{#mdl-table-object class='full-width' content=daily as |day|}}
+    {{#mdl-table-col label='Protein'}}
+      {{day.protein}}
     {{/mdl-table-col}}
 
-    {{#mdl-table-col label='Multiplier'}}
-      {{condition.multiplier}}
+    {{#mdl-table-col label='carb'}}
+      {{day.carbs}}
     {{/mdl-table-col}}
 
-    {{#mdl-table-col label='total'}}
-      {{multiplier bmr condition.multiplier}}
+    {{#mdl-table-col label='fat'}}
+      {{day.fats}}
     {{/mdl-table-col}}
-  {{/mdl-table}}
+  {{/mdl-table-object}}
 {{/mdl-card}}
 {{outlet}}
 </div>

@@ -1,5 +1,9 @@
 import Ember from 'ember';
+import EmberCPM from 'ember-cpm';
+
 const { computed } = Ember;
+const { Macros: { sum, difference, product }} = EmberCPM;
+
 
 export default Ember.Controller.extend({
   weight: 270,
@@ -21,26 +25,75 @@ export default Ember.Controller.extend({
     }
   ],
 
-  hbeConditions: [
-    {
+  hbeConditions: {
+    none: {
       title: 'no activity',
-      multiplier: 1.2
+      multiplier: 1.2,
     },
-    {
+    light: {
       title: 'light',
-      multiplier: 1.375
+      multiplier: 1.375,
     },
-    {
+    moderate: {
       title: 'moderate',
       multiplier: 1.55
     },
-    {
+    heavy: {
       title: 'heavy',
       multiplier: 1.725
     },
-    {
+    ultra: {
       title: 'ultra heavy',
       multiplier: 1.9
+    }
+  },
+
+  daily: {},
+
+
+  init() {
+    const hbes = Object.keys(this.get('hbeConditions'))
+    hbes.forEach((key) => {
+      this.set(`hbeConditions.${key}.calories`, computed('bmr', 'weight', () => {
+        return Math.ceil(this.get('bmr') * this.get(`hbeConditions.${key}.multiplier`));
+      }));
+    });
+
+    // Construct daily needs
+    hbes.forEach((key) => {
+      this.set(`daily.${key}`, {});
+
+      this.set(`daily.${key}.protein`, computed('bmr', () => {
+        return this.get('weight') * 1;
+      }));
+
+      this.set(`daily.${key}.carbs`, computed('bmr', () => {
+        return 0.5 * this.get(`weight`);
+      }));
+
+      this.set(`daily.${key}.fats`, computed('bmr', () => {
+        const dailyCaloricIntake = this.get(`hbeConditions.${key}.calories`);
+        const calsFromProtein = this.get(`daily.${key}.protein`) * 4
+        const calsFromCarbs = this.get(`daily.${key}.carbs`) * 4;
+        const calsFromFat = (dailyCaloricIntake - (calsFromProtein + calsFromCarbs)) / 9;
+
+        return Math.ceil(calsFromFat);
+      }));
+
+    });
+
+  },
+
+  hbeNoneCalories: computed('bmr', function() {
+    return this.get('bmr') * this.get('hbeConditions.none.multiplier');
+  }),
+
+  noneCalories: product('hbeConditions.none.multiplier', 'bmr'),
+
+  dailyMacros: [
+    {
+      title: 'off',
+      calories: ''
     }
   ],
 
