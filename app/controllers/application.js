@@ -25,28 +25,6 @@ const foodDay = Ember.Object.extend({
   fats: quotient('caloriesFromFat', 9)
 });
 
-const FoodDayPlan = Ember.Object.extend({
-  foodPlan: null,
-  mealsPerDay: 5,
-  meals: computed('mealsPerDay', 'human.bmr', function() {
-    const fp = this.get('foodPlan');
-    const a = [];
-    let i = 0;
-    for(i; i < this.get('mealsPerDay'); i +=1) {
-      a.push({
-        id: i + 1,
-        carbs: (fp.get('carbs')/ this.get('mealsPerDay')),
-        fats: quotient(fp.get('fats'), this.get('mealsPerDay')),
-        protein: quotient(fp.get('protein'), this.get('mealsPerDay')),
-
-        calories: quotient(fp.get('calories'), this.get('mealsPerDay'))
-      });
-    }
-    return Ember.ArrayProxy.extend({
-      content: a
-    }).create()
-  })
-});
 
 export default Ember.Controller.extend({
   macros,
@@ -69,7 +47,7 @@ export default Ember.Controller.extend({
       hbeMultiplier: 1.2,
       carbMultiplier: 0.5
     });
-    this.set('nonePlan', none);
+    this.set('noActivity', none);
 
     const light = foodDay.create({
       human,
@@ -107,11 +85,6 @@ export default Ember.Controller.extend({
       heavy,
       ultra
     });
-
-    this.set('foodDayPlan', FoodDayPlan.create({
-      foodPlan: none,
-      human
-    }));
   },
 
   hbeNoneCalories: computed('bmr', function() {

@@ -93,42 +93,7 @@
 
 <h2>Nutrient Timing</h2>
 <div class="mdl-grid">
-
-
-{{#mdl-card title='No Workout' class='repulator-card mdl-cell mdl-cell--4-col' }}
-  <p>
-  meals per day {{foodDayPlan.mealsPerDay}}
-  {{paper-slider flex=true min='1' max='7' value=foodDayPlan.mealsPerDay class='md-primary'}}
-  </p>
-  {{!foodDayPlan.meals}}
-  <p>Calories: {{ceil nonePlan.calories}}</p>
-  <p>Fat: {{ceil nonePlan.fats}}</p>
-  <p>Carbs: {{ceil nonePlan.carbs}}</p>
-  <p>Protein: {{ceil nonePlan.protein}}</p>
-
-  {{#mdl-table class='full-width' content=foodDayPlan.meals as |meal|}}
-    {{#mdl-table-col label='id'}}
-      {{meal.id}}
-    {{/mdl-table-col}}
-
-    {{#mdl-table-col label='calories'}}
-      {{ceil meal.calories}}
-    {{/mdl-table-col}}
-
-    {{#mdl-table-col label='protein'}}
-      {{ceil meal.protein}}
-    {{/mdl-table-col}}
-
-    {{#mdl-table-col label='carbs'}}
-      {{ceil meal.carbs}}
-    {{/mdl-table-col}}
-
-    {{#mdl-table-col label='fats'}}
-      {{ceil meal.fats}}
-    {{/mdl-table-col}}
-
-  {{/mdl-table}}
-{{/mdl-card}}
+  {{food-day-plan human=human foodPlan=noActivity}}
 </div>
 <p>&nbsp;</p>
 <p>&nbsp;</p>

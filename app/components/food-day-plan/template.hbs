@@ -1,0 +1,34 @@
+{{#mdl-card title='No Workout' class='repulator-card mdl-cell mdl-cell--4-col' }}
+  <p>
+  meals per day {{mealsPerDay}}
+  {{paper-slider flex=true min='1' max='7' value=mealsPerDay class='md-primary'}}
+  </p>
+  {{!foodDayPlan.meals}}
+  <p>Calories: {{ceil foodPlan.calories}}</p>
+  <p>Fat: {{ceil foodPlan.fats}}</p>
+  <p>Carbs: {{ceil foodPlan.carbs}}</p>
+  <p>Protein: {{ceil foodPlan.protein}}</p>
+
+  {{#mdl-table class='full-width' content=meals as |meal|}}
+    {{#mdl-table-col label='id'}}
+      {{meal.id}}
+    {{/mdl-table-col}}
+
+    {{#mdl-table-col label='calories'}}
+      {{ceil meal.calories}}
+    {{/mdl-table-col}}
+
+    {{#mdl-table-col label='protein'}}
+      {{ceil meal.protein}}
+    {{/mdl-table-col}}
+
+    {{#mdl-table-col label='carbs'}}
+      {{ceil meal.carbs}}
+    {{/mdl-table-col}}
+
+    {{#mdl-table-col label='fats'}}
+      {{ceil meal.fats}}
+    {{/mdl-table-col}}
+
+  {{/mdl-table}}
+{{/mdl-card}}
