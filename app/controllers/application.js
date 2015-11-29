@@ -47,21 +47,21 @@ export default Ember.Controller.extend({
       hbeMultiplier: 1.2,
       carbMultiplier: 0.5
     });
-    this.set('noActivity', none);
 
     const light = foodDay.create({
       human,
       title: 'light',
       hbeMultiplier: 1.375,
-      carbMultiplier: 1
+      carbMultiplier: 1,
+      workout: true
     });
-    this.set('lightActivity', light);
 
     const moderate = foodDay.create({
       human,
       title: 'moderate',
       hbeMultiplier: 1.55,
-      carbMultiplier: 1.5
+      carbMultiplier: 1.5,
+      workout: true
     });
 
 
@@ -69,22 +69,24 @@ export default Ember.Controller.extend({
       human,
       title: 'heavy',
       hbeMultiplier: 1.725,
-      carbMultiplier: 2
+      carbMultiplier: 2,
+      workout: true
     });
 
-    const ultra = foodDay.create({
-      human,
-      title: 'ultra',
-      hbeMultiplier: 1.9,
-      carbMultiplier: 2
-    });
+    // const ultra = foodDay.create({
+    //   human,
+    //   title: 'ultra',
+    //   hbeMultiplier: 1.9,
+    //   carbMultiplier: 2,
+    //   workout: true
+    // });
 
     this.set('days', {
       none,
       light,
       moderate,
       heavy,
-      ultra
+      // ultra
     });
   },
 

@@ -28,10 +28,10 @@ export default Ember.Component.extend({
 
     // pre workout, during, and post
     // if no w/oflag, empty array
-    let revCarbDistribution = this.get('workoutFlag') ? [.35, .4, .15] : [];
+    let revCarbDistribution = this.get('foodPlan.workout') ? [.35, .4, .15] : [];
 
     // pre workout, during, and post
-    let revFatDistribution = this.get('workoutFlag') ? [.1, .0, .1] : [];
+    let revFatDistribution = this.get('foodPlan.workout') ? [.1, .0, .1] : [];
 
     let remainingCarbs = 1;
     let remainingFats = 1;
