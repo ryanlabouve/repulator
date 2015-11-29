@@ -34,7 +34,7 @@ const FoodDayPlan = Ember.Object.extend({
     let i = 0;
     for(i; i < this.get('mealsPerDay'); i +=1) {
       a.push({
-        id: i,
+        id: i + 1,
         carbs: (fp.get('carbs')/ this.get('mealsPerDay')),
         fats: quotient(fp.get('fats'), this.get('mealsPerDay')),
         protein: quotient(fp.get('protein'), this.get('mealsPerDay')),

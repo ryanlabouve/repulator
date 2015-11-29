@@ -101,10 +101,10 @@
   {{paper-slider flex=true min='1' max='7' value=foodDayPlan.mealsPerDay class='md-primary'}}
   </p>
   {{!foodDayPlan.meals}}
-  <p>Calories: {{nonePlan.calories}}</p>
-  <p>Fat: {{nonePlan.fats}}</p>
-  <p>Carbs: {{nonePlan.carbs}}</p>
-  <p>Protein: {{nonePlan.protein}}</p>
+  <p>Calories: {{ceil nonePlan.calories}}</p>
+  <p>Fat: {{ceil nonePlan.fats}}</p>
+  <p>Carbs: {{ceil nonePlan.carbs}}</p>
+  <p>Protein: {{ceil nonePlan.protein}}</p>
 
   {{#mdl-table class='full-width' content=foodDayPlan.meals as |meal|}}
     {{#mdl-table-col label='id'}}
