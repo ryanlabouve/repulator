@@ -51,14 +51,14 @@ export default Ember.Component.extend({
       proteinDist = evenProteinDist;
 
       let carbPop = revCarbDistribution.pop()
-      if(carbPop) {
+      if(!isNaN(carbPop)) {
         carbDist = carbPop;
       } else {
         carbDist = evenCarbDist;
       }
 
       let fatPop = revFatDistribution.pop()
-      if(fatPop) {
+      if(!isNaN(fatPop)) {
         fatDist = fatPop;
       } else {
         fatDist = evenFatDist;
@@ -90,8 +90,11 @@ export default Ember.Component.extend({
       a.push({
         id: i + 1,
         carbs: fp.get('carbs') * distribution[i].carbs,
+        carbsDist: distribution[i].carbs,
         fats: fp.get('fats') * distribution[i].fats,
+        fatsDist: distribution[i].fats,
         protein: fp.get('protein') * distribution[i].proteins,
+        proteinDist: distribution[i].proteins,
 
         calories: computed('', function() {
           return (this.carbs * 4) + (this.protein*4) + (this.fats*9);
@@ -99,7 +102,7 @@ export default Ember.Component.extend({
       });
     }
     return Ember.ArrayProxy.extend({
-      content: a.reverse()
+      content: a
     }).create()
   })
 });

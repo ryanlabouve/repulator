@@ -19,15 +19,15 @@
     {{/mdl-table-col}}
 
     {{#mdl-table-col label='protein'}}
-      {{ceil meal.protein}}
+      {{ceil meal.protein}} <span class="muted">({{percents meal.proteinDist}})</span>
     {{/mdl-table-col}}
 
     {{#mdl-table-col label='carbs'}}
-      {{ceil meal.carbs}}
+      {{ceil meal.carbs}} <span class="muted">({{percents meal.carbsDist}})</span>
     {{/mdl-table-col}}
 
     {{#mdl-table-col label='fats'}}
-      {{ceil meal.fats}}
+      {{ceil meal.fats}} <span class="muted">({{percents meal.fatsDist}})</span>
     {{/mdl-table-col}}
 
   {{/mdl-table}}
