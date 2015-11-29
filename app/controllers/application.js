@@ -55,6 +55,7 @@ export default Ember.Controller.extend({
       hbeMultiplier: 1.375,
       carbMultiplier: 1
     });
+    this.set('lightActivity', light);
 
     const moderate = foodDay.create({
       human,
