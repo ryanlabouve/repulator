@@ -9,8 +9,6 @@ const { Macros: { sum, difference, product, quotient }} = EmberCPM;
 const daily = Ember.Object.create({
 });
 
-
-
 const foodDay = Ember.Object.extend({
   title: null,
   hbeMultiplier: null,
@@ -27,6 +25,28 @@ const foodDay = Ember.Object.extend({
   fats: quotient('caloriesFromFat', 9)
 });
 
+const FoodDayPlan = Ember.Object.extend({
+  foodPlan: null,
+  mealsPerDay: 5,
+  meals: computed('mealsPerDay', 'human.bmr', function() {
+    const fp = this.get('foodPlan');
+    const a = [];
+    let i = 0;
+    for(i; i < this.get('mealsPerDay'); i +=1) {
+      a.push({
+        id: i,
+        carbs: (fp.get('carbs')/ this.get('mealsPerDay')),
+        fats: quotient(fp.get('fats'), this.get('mealsPerDay')),
+        protein: quotient(fp.get('protein'), this.get('mealsPerDay')),
+
+        calories: quotient(fp.get('calories'), this.get('mealsPerDay'))
+      });
+    }
+    return Ember.ArrayProxy.extend({
+      content: a
+    }).create()
+  })
+});
 
 export default Ember.Controller.extend({
   macros,
@@ -49,6 +69,7 @@ export default Ember.Controller.extend({
       hbeMultiplier: 1.2,
       carbMultiplier: 0.5
     });
+    this.set('nonePlan', none);
 
     const light = foodDay.create({
       human,
@@ -87,29 +108,10 @@ export default Ember.Controller.extend({
       ultra
     });
 
-    // Construct daily needs
-    // hbes.forEach((key) => {
-    //   this.set(`daily.${key}`, {});
-    //
-    //   this.set(`daily.${key}.protein`, computed('bmr', () => {
-    //     return this.get('weight') * 1;
-    //   }));
-    //
-    //   this.set(`daily.${key}.carbs`, computed('bmr', () => {
-    //     return 0.5 * this.get(`weight`);
-    //   }));
-    //
-    //   this.set(`daily.${key}.fats`, computed('bmr', () => {
-    //     const dailyCaloricIntake = this.get(`hbeConditions.${key}.calories`);
-    //     const calsFromProtein = this.get(`daily.${key}.protein`) * 4
-    //     const calsFromCarbs = this.get(`daily.${key}.carbs`) * 4;
-    //     const calsFromFat = (dailyCaloricIntake - (calsFromProtein + calsFromCarbs)) / 9;
-    //
-    //     return Math.ceil(calsFromFat);
-    //   }));
-    //
-    // });
-
+    this.set('foodDayPlan', FoodDayPlan.create({
+      foodPlan: none,
+      human
+    }));
   },
 
   hbeNoneCalories: computed('bmr', function() {
@@ -124,5 +126,11 @@ export default Ember.Controller.extend({
       calories: ''
     }
   ],
+  actions: {
+    bob() {
+      alert('bob');
+      debugger;
+    }
+  }
 
 });

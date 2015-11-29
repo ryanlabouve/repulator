@@ -1,4 +1,5 @@
 @import 'material-design-lite';
+@import 'ember-paper';
 
 .full-width {
   width: 100%;
@@ -12,4 +13,10 @@
   color: white !important;
 };
 
+thead tr th:empty {
+  display:none;
+}
 
+body {
+  padding-bottom: 120px;
+}

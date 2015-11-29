@@ -1,5 +1,6 @@
+<h1>Stats &amp; Basic Diet</h1>
 <div class="mdl-grid">
-{{#mdl-card title='Macro\'s Caloric Content' class=" text-white"}}
+{{#mdl-card title='Macro\'s Caloric Content' class=" text-white mdl-cell mdl-cell--2-col"}}
   <div class="mdl-card__supporting-text">Each macronutrient has a ballpart calorie count.</div>
   {{#mdl-table-object class='full-width' content=macros as |macro|}}
     {{#mdl-table-col label='Macro'}}
@@ -12,19 +13,33 @@
   {{/mdl-table-object}}
 {{/mdl-card}}
 
-{{#mdl-card title='Stats' class='repulator-card' }}
+{{#mdl-card title='Stats' class='repulator-card mdl-cell mdl-cell--3-col' }}
   <div class="mdl-card__supporting-text">
-    {{mdl-textfield label='Weight' value=human.weight}}
-    {{mdl-textfield label='Height' value=human.height}}
-    {{mdl-textfield label='Age' value=human.age}}
+    <p>
+      {{mdl-textfield label='Weight' value=human.weight}}
+      {{paper-slider flex=true min='90' max='320' value=human.weight class='md-primary'}}
+    </p>
+    <p>
+      {{mdl-textfield label='Height' value=human.height}}
+      {{paper-slider flex=true min='48' max='84' value=human.height class='md-primary'}}
+      {{human.heightInFt}}
+    </p>
+    <p>
+      {{mdl-textfield label='Age' value=human.age}}
+      {{paper-slider flex=true min='1' max='100' value=human.age class='md-primary'}}
+    </p>
     <div>
-      {{mdl-radio value='male' text='Male' name='sex'}}
-      {{mdl-radio text='Female' name='sex' value='female'}}
+      {{#paper-radio value="male" selected=human.sex}}
+        Male
+      {{/paper-radio}}
+      {{#paper-radio value="female" selected=human.sex}}
+        Female
+      {{/paper-radio}}
     </div>
   </div>
 {{/mdl-card}}
 
-{{#mdl-card title='Daily Caloric Needs' class='repulator-card' }}
+{{#mdl-card title='Daily Caloric Needs' class='repulator-card mdl-cell mdl-cell--3-col' }}
   <div class="mdl-card__supporting-text">
     BMR: {{human.bmr}}<br>
     http://www.bmi-calculator.net/bmr-calculator/bmr-formula.php
@@ -43,31 +58,81 @@
     {{/mdl-table-col}}
 
     {{#mdl-table-col label='total'}}
-      {{!multiplier bmr condition.multiplier}}
-      {{condition.calories}}
+      {{ceil condition.calories}}
     {{/mdl-table-col}}
   {{/mdl-table-object}}
 {{/mdl-card}}
 
 
-{{#mdl-card title='Maintaincene' class='repulator-card' }}
+{{#mdl-card title='Maintenance' class='repulator-card mdl-cell mdl-cell--4-col' }}
   {{#mdl-table-object class='full-width' content=days as |day|}}
+    {{#mdl-table-col label='Activity Level'}}
+      {{day.title}}
+    {{/mdl-table-col}}
+
     {{#mdl-table-col label='Calories'}}
-      {{day.calories}}
+      {{ceil day.calories}}
     {{/mdl-table-col}}
 
     {{#mdl-table-col label='Protein'}}
-      {{day.protein}}
+      {{ceil day.protein}}
     {{/mdl-table-col}}
 
     {{#mdl-table-col label='Carbs'}}
-      {{day.carbs}}
+      {{ceil day.carbs}}
     {{/mdl-table-col}}
 
     {{#mdl-table-col label='Fats'}}
-      {{day.fats}}
+      {{ceil day.fats}}
     {{/mdl-table-col}}
   {{/mdl-table-object}}
 {{/mdl-card}}
 {{outlet}}
 </div>
+
+
+<h2>Nutrient Timing</h2>
+<div class="mdl-grid">
+
+
+{{#mdl-card title='No Workout' class='repulator-card mdl-cell mdl-cell--4-col' }}
+  <p>
+  meals per day {{foodDayPlan.mealsPerDay}}
+  {{paper-slider flex=true min='1' max='7' value=foodDayPlan.mealsPerDay class='md-primary'}}
+  </p>
+  {{!foodDayPlan.meals}}
+  <p>Calories: {{nonePlan.calories}}</p>
+  <p>Fat: {{nonePlan.fats}}</p>
+  <p>Carbs: {{nonePlan.carbs}}</p>
+  <p>Protein: {{nonePlan.protein}}</p>
+
+  {{#mdl-table class='full-width' content=foodDayPlan.meals as |meal|}}
+    {{#mdl-table-col label='id'}}
+      {{meal.id}}
+    {{/mdl-table-col}}
+
+    {{#mdl-table-col label='calories'}}
+      {{ceil meal.calories}}
+    {{/mdl-table-col}}
+
+    {{#mdl-table-col label='protein'}}
+      {{ceil meal.protein}}
+    {{/mdl-table-col}}
+
+    {{#mdl-table-col label='carbs'}}
+      {{ceil meal.carbs}}
+    {{/mdl-table-col}}
+
+    {{#mdl-table-col label='fats'}}
+      {{ceil meal.fats}}
+    {{/mdl-table-col}}
+
+  {{/mdl-table}}
+{{/mdl-card}}
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
